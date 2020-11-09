@@ -10,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 
@@ -47,9 +48,10 @@ public class ResultAdapter extends RecyclerView.Adapter<ResultAdapter.ResultView
         final int index = i;
         Glide.with(context).load(Singlton.getInstance().characterList.get(i).picture.getMedium())
                 .into(holder.image);
+
         holder.textName.setText(results.get(i).getName().getFirst());
 
-        holder.textName.setOnClickListener(new View.OnClickListener() {
+        holder.root.setOnClickListener(new View.OnClickListener() {
             @Override public void onClick(View v) {
                 Intent intent = new Intent(context, DetailActivity.class);
                 intent.putExtra("position", index);
@@ -68,9 +70,11 @@ public class ResultAdapter extends RecyclerView.Adapter<ResultAdapter.ResultView
 
         TextView textName;
         ImageView image;
+        RelativeLayout root;
 
         ResultViewHolder(@NonNull View itemView) {
             super(itemView);
+            root =itemView.findViewById(R.id.root);
             textName = itemView.findViewById(R.id.name);
             image = itemView.findViewById(R.id.image);
 
